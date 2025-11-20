@@ -8,9 +8,9 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between mt-4">
-      <span className="logo text-green-500 text-2xl">mockdev</span>
+      <span className="logo text-blue-400 text-2xl">mockdev</span>
       <SignedIn>
-        {location.pathname === "/projects" ? (
+        {location.pathname.startsWith("/projects") ? (
           <UserButton />
         ) : (
           <div className="space-x-4">

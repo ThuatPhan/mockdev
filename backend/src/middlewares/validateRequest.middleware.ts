@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
-import { ZodObject, ZodError } from 'zod'
 import { StatusCodes } from 'http-status-codes'
-import ApiResponse from '@/utils/api-response'
+import ApiResponse from '@/utils/apiResponse'
+import { ZodObject, ZodError } from 'zod'
 
-export const validateRequest = (schema: ZodObject) => async (req: Request, res: Response, next: NextFunction) => {
+const validateRequest = (schema: ZodObject) => async (req: Request, res: Response, next: NextFunction) => {
   try {
     const parsedBody = await schema.parseAsync(req.body)
     req.body = parsedBody
@@ -18,3 +18,5 @@ export const validateRequest = (schema: ZodObject) => async (req: Request, res: 
     return ApiResponse.error('Internal Server Error').send(res)
   }
 }
+
+export default validateRequest

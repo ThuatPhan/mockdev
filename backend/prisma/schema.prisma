@@ -9,10 +9,21 @@ datasource db {
 }
 
 model User {
-  id        String  @id
-  email     String  @unique
+  id        String    @id
+  email     String    @unique
   image     String
   firstname String
   lastname  String?
   banned    Boolean
+  projects  Project[]
+}
+
+model Project {
+  id        String   @id @default(uuid())
+  name      String
+  prefix    String?
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }

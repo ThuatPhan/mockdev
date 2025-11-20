@@ -23,6 +23,7 @@ span.logo {
   box-shadow: none !important;
 }
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

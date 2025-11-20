@@ -1,17 +1,17 @@
-import { clerkMiddleware } from '@clerk/express'
-import { serve } from 'inngest/express'
-import { exit } from 'node:process'
-import express from 'express'
 import cors from 'cors'
+import express from 'express'
 import ENV from '@/config/env'
-import logger from '@/config/logger'
+import { exit } from 'node:process'
 import routes from '@/routes/index'
+import logger from '@/config/logger'
+import { serve } from 'inngest/express'
+import { clerkMiddleware } from '@clerk/express'
 import { inngest, functions } from '@/config/inngest'
-import exceptionHandler from '@/middlewares/exception.handler.middleware'
+import exceptionHandler from '@/middlewares/exceptionHandler.middleware'
 
 const app = express()
 
-app.use(cors())
+app.use(cors({ origin: ENV.ALLOWED_ORIGIN, credentials: true }))
 app.use(express.json())
 app.use(clerkMiddleware({ publishableKey: ENV.CLERK_PUBLISHABLE_KEY, secretKey: ENV.CLERK_SECRET_KEY }))
 app.use('/api', routes)
