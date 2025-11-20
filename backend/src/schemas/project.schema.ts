@@ -1,13 +1,13 @@
 import { z } from 'zod'
 
-export const projectSchema = z.object({
+export const createProjectSchema = z.object({
   name: z
     .string({ error: 'Project name is required' })
     .trim()
     .min(3, 'Project name must be at least 3 characters')
     .max(50, 'Project name is too long'),
 
-  apiPrefix: z
+  prefix: z
     .string()
     .trim()
     .refine((val) => !val.includes(' '), {
@@ -25,4 +25,7 @@ export const projectSchema = z.object({
     .optional()
 })
 
-export type ProjectInput = z.infer<typeof projectSchema>
+export const updateProjectSchema = createProjectSchema.partial()
+
+export type CreateProjectInput = z.infer<typeof createProjectSchema>
+export type UpdateProjectInput = z.infer<typeof updateProjectSchema>

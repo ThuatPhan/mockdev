@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
+import ApiResponse from '@/utils/apiResponse'
+import AppError from '@/exceptions/appError'
 import logger from '@/config/logger'
-import AppError from '@/errors/app.error'
-import ApiResponse from '@/utils/api-response'
 
 const exceptionHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
   logger.error(err.message, err)

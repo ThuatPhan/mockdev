@@ -20,11 +20,11 @@ class ApiResponse<T> {
     return new ApiResponse<T>(code, errors, message)
   }
 
-  send(res: Response): Response {
+  send(res: Response, statusCode?: number): Response {
     return res.status(this.code).json({
-      code: this.code,
-      data: this.data,
-      message: this.message
+      code: statusCode ?? this.code,
+      message: this.message,
+      data: this.data
     })
   }
 }
